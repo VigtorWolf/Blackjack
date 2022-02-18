@@ -21,10 +21,10 @@ namespace Blackjack
                         (suit, rank) => new Card(rank, suit))
                     .ToArray();
         }
-        public string getCard()
+        public string GetRandomCard()
         {
             int i = rnd.Next(cards.Length);
-            var drawnCard = cards[i];
+            Card? drawnCard = cards[i];
             string suit = drawnCard.Suit;
             var rank = drawnCard.Rank;
             cards = cards.Where((source, index) => index != i).ToArray();
@@ -39,6 +39,10 @@ namespace Blackjack
             if (rank == 13)
             {
                 return "King of " + suit;
+            }
+            if (rank == 1)
+            {
+                return "Ace of " + suit;
             }
             return rank + " of " + suit;
         }
