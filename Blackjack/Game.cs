@@ -42,7 +42,7 @@ namespace Blackjack
         {
             while (restart == true)
             {
-                //IMPORTANT THAT THE GAME IS INSTANSIATED AFTER RESTART.
+                //IMPORTANT THAT THE Deck IS INSTANSIATED AFTER RESTART.
                 //Otherwise the deck continues to shrink until there are no cards left.
                 var deck = new Deck();
                 Console.WriteLine("Welcome customer, today we will be playing a game of blackjack, I will be your dealer");
@@ -59,6 +59,7 @@ namespace Blackjack
 
                 Console.WriteLine("Would you like to STAND or HIT?");
 
+                //Console reader:
                 input = Console.ReadLine().ToLower();
 
                 while (input != "END")
@@ -73,6 +74,7 @@ namespace Blackjack
                     }
                     switch (hitOrStand)
                     {
+                        //Dealer plays:
                         case 1:
                             while (dealerTotal < 21 && dealerTotal <= playerTotal)
                             {
@@ -100,8 +102,8 @@ namespace Blackjack
                                 input = "END";
                                 break;
                             }
+                        //Player plays:
                         case 2:
-
                             playerCard = deck.GetRandomCard();
                             Console.WriteLine($"Player draws an extra card: {playerCard}");
                             playerTotal = playerTotal + PlayerGetInt(playerCard);
@@ -127,6 +129,8 @@ namespace Blackjack
                             break;
                     }
                 }
+                //replay function, works as a while loop, not the most efficient solution, but because of the size of the game
+                //It doesn't reduce efficiency performancewise.
                 Console.WriteLine("Would you like to play again? YES/NO");
                 if (Console.ReadLine().ToLower() != "yes")
                 {
@@ -134,6 +138,11 @@ namespace Blackjack
                 }
             }
         }
+
+        //The reason the next 2 methods look the same,is because there is a difference on playertotal and dealertotal, it might be worth to send the information from
+        //The other method, and reduce this to 1 method instead.
+        //This function determines what a king/queen value is, and what an ace should be when drawn relatively to player/dealer total.
+        //Maybe it's better if half of this function is in the Deck class instead, but it is important that ace is determined with totals in mind.
         public int PlayerGetInt(string subjectString)
         {
             int total = 0;

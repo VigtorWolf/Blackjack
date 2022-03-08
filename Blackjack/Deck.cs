@@ -12,6 +12,7 @@ namespace Blackjack
         private Card[] cards;
         Random rnd = new Random();
 
+        //Builds the deck.
         public Deck()   
         {
             cards =
@@ -21,6 +22,7 @@ namespace Blackjack
                         (suit, rank) => new Card(rank, suit))
                     .ToArray();
         }
+        //Used to get a random card, and checks if the card is ace or picture.
         public string GetRandomCard()
         {
             int i = rnd.Next(cards.Length);
